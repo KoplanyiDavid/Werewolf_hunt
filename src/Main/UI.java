@@ -52,16 +52,26 @@ public class UI {
         bgLabel[bgNum].setIcon(bgIcon);
 
     }
-    public void createObject(int bgNum, int x, int y, int w, int h, String fileName, String choice1Name, String choice2Name, String choice3Name) {
+    public void createObject(int bgNum, int x, int y, int w, int h, String fileName, String choice0Name,
+                             String choice1Name, String choice2Name, String choice0Command, String choice1Command,
+                             String choice2Command) {
         /* Pop Menu for objects */
         JPopupMenu popMenu = new JPopupMenu();
         /* Pop menu items */
         JMenuItem[] menuItem = new JMenuItem[3];
-        menuItem[0] = new JMenuItem(choice1Name);
+        menuItem[0] = new JMenuItem(choice0Name);
+        menuItem[0].addActionListener(gm.aHandler);
+        menuItem[0].setActionCommand(choice0Command);
         popMenu.add(menuItem[0]);
-        menuItem[1] = new JMenuItem(choice2Name);
+
+        menuItem[1] = new JMenuItem(choice1Name);
+        menuItem[1].addActionListener(gm.aHandler);
+        menuItem[1].setActionCommand(choice1Command);
         popMenu.add(menuItem[1]);
-        menuItem[2] = new JMenuItem(choice3Name);
+
+        menuItem[2] = new JMenuItem(choice2Name);
+        menuItem[2].addActionListener(gm.aHandler);
+        menuItem[2].setActionCommand(choice2Command);
         popMenu.add(menuItem[2]);
         /* objects */
         JLabel objectLabel = new JLabel();
@@ -107,8 +117,8 @@ public class UI {
     public void generateScreen() {
         // Screen 1
         createBackground(0, "main_bgd.png");
-        createObject(0,1200,285,900,700,"house.png","Look","Talk","Rest");
-        createObject(0,300,500,100,300,"knight.png","Look","Talk","Attack");
-        createObject(0,1150,800,200,100,"chest.png","Look","Talk","Open");
+        createObject(0,1200,285,900,700,"house.png","Look","Talk","Rest", "lookHouse", "talkHouse", "restHouse");
+        createObject(0,300,500,100,300,"knight.png","Look","Talk","Attack", "lookKnight", "talkKnight", "attackKnight");
+        createObject(0,1000,800,200,100,"chest.png","Look","Talk","Open", "lookChest", "talkChest", "openChest");
     }
 }
