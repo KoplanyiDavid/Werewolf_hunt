@@ -15,7 +15,7 @@ public class UI {
     public UI(GameManager gm) {
         this.gm = gm;
         createMainField();
-        generateScreen();
+        generateScene();
         window.setVisible(true);
     }
 
@@ -50,7 +50,6 @@ public class UI {
         Image newImg = image.getScaledInstance(1920,880,Image.SCALE_SMOOTH);
         bgIcon = new ImageIcon(newImg);
         bgLabel[bgNum].setIcon(bgIcon);
-
     }
     public void createObject(int bgNum, int x, int y, int w, int h, String fileName, String choice0Name,
                              String choice1Name, String choice2Name, String choice0Command, String choice1Command,
@@ -112,13 +111,43 @@ public class UI {
         });
 
         bgPanel[bgNum].add(objectLabel);
-        bgPanel[bgNum].add(bgLabel[bgNum]);
+
     }
-    public void generateScreen() {
-        // Screen 1
+
+    public void createArrowButton(int bgNum, int x, int y, int w, int h, String command, String arrowFilePath) {
+        ImageIcon arrowIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(arrowFilePath)));
+        Image image = arrowIcon.getImage();
+        Image newImg = image.getScaledInstance(w,h,Image.SCALE_SMOOTH);
+        arrowIcon = new ImageIcon(newImg);
+
+        JButton arrowButton = new JButton();
+        arrowButton.setIcon(arrowIcon);
+        arrowButton.setBorderPainted(false);
+        arrowButton.setBounds(x, y, w, h);
+        arrowButton.setBackground(null);
+        arrowButton.setContentAreaFilled(false);
+        arrowButton.setFocusPainted(false);
+
+        arrowButton.addActionListener(gm.aHandler);
+        arrowButton.setActionCommand(command);
+
+        bgPanel[bgNum].add(arrowButton);
+    }
+    public void generateScene() {
+        // Scene 1
         createBackground(0, "main_bgd.png");
         createObject(0,1200,285,900,700,"house.png","Look","Talk","Rest", "lookHouse", "talkHouse", "restHouse");
         createObject(0,300,500,100,300,"knight.png","Look","Talk","Attack", "lookKnight", "talkKnight", "attackKnight");
         createObject(0,1000,800,200,100,"chest.png","Look","Talk","Open", "lookChest", "talkChest", "openChest");
+
+        createArrowButton(0, 0, 150, 50, 50,"goScene2", "leftarrow.png");
+        bgPanel[0].add(bgLabel[0]);
+
+        // Scene 2
+        createBackground(1, "cave_entrance.jpg");
+        createObject(1,0,500,200,300,"empty.png","Look","Talk","Enter", "lookCave", "talkCave", "enterCave");
+        createObject(1,500,500,200,300,"empty.png","Look","Talk","Search", "lookWoods", "talkWoods", "enterWoods");
+        createArrowButton(1, 1500, 150, 50, 50,"goScene1", "rightarrow.png");
+        bgPanel[1].add(bgLabel[1]);
     }
 }
