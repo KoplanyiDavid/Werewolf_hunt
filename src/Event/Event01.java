@@ -17,7 +17,14 @@ public class Event01 {
     }
 
     public void restHouse() {
-        gm.ui.messageText.setText("Pihensz.\nAz életed töltődik.");
+        if (gm.player.playerLife != gm.player.playerMaxLife) {
+            gm.ui.messageText.setText("Pihensz.\nAz életed töltődik.");
+            gm.player.playerLife++;
+            gm.player.updatePlayerStatus();
+        }
+        else {
+            gm.ui.messageText.setText("Tele van az életed.");
+        }
     }
 
     public void lookKnight() {
@@ -29,7 +36,28 @@ public class Event01 {
     }
 
     public void attackKnight() {
-        gm.ui.messageText.setText("Lovag: Hé, ne légy ostoba!");
+        if (gm.player.hasShield == 0) {
+            if (gm.player.hasSword == 0) {
+                if (gm.player.playerLife != 1) {
+                    gm.ui.messageText.setText("Lovag: Hé, ne légy ostoba!");
+                    gm.player.playerLife--;
+                    gm.player.updatePlayerStatus();
+                }
+                else if (gm.player.playerLife == 1) {
+                    gm.ui.messageText.setText("Lovag: Idióta...");
+                    gm.player.playerLife--;
+                    gm.player.updatePlayerStatus();
+                }
+            }
+            else if (gm.player.hasSword == 1) {
+                gm.ui.messageText.setText("Lovag: Bassza meg! AHH...\n(Legyőzted a lovagot és megszerezted a pajzsát)");
+                gm.player.hasShield = 1;
+                gm.player.updatePlayerStatus();
+            }
+        }
+        else {
+            gm.ui.messageText.setText("Lovag: Hagyj békén...");
+        }
     }
 
     public void lookChest() {
@@ -41,6 +69,13 @@ public class Event01 {
     }
 
     public void openChest() {
-        gm.ui.messageText.setText("Kinyitod a ládát és találsz egy kardot!");
+        if (gm.player.hasSword == 0) {
+            gm.ui.messageText.setText("Kinyitod a ládát és találsz egy kardot!");
+            gm.player.hasSword = 1;
+            gm.player.updatePlayerStatus();
+        }
+        else {
+            gm.ui.messageText.setText("A láda üres...");
+        }
     }
 }

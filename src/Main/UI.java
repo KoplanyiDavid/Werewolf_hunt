@@ -12,11 +12,66 @@ public class UI {
     public JTextArea messageText;
     public JPanel[] bgPanel = new JPanel[10];
     public JLabel[] bgLabel = new JLabel[10];
+
+    //player ui
+    JPanel lifePanel;
+    JLabel[] lifeLabel = new JLabel[6];
+    JPanel inventoryPanel;
+    public JLabel swordLabel, shieldLabel, lanternLabel;
     public UI(GameManager gm) {
         this.gm = gm;
         createMainField();
+        createPlayerField();
         generateScene();
         window.setVisible(true);
+    }
+
+    private void createPlayerField() {
+        lifePanel = new JPanel();
+        lifePanel.setBounds(50,0,250,50);
+        lifePanel.setBackground(Color.black);
+        lifePanel.setLayout(new GridLayout(1,5));
+        window.add(lifePanel);
+
+        ImageIcon lifeIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("heart.png")));
+        Image image = lifeIcon.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        lifeIcon = new ImageIcon(image);
+
+        int i=1;
+        while(i<6) {
+            lifeLabel[i] = new JLabel();
+            lifeLabel[i].setIcon(lifeIcon);
+            lifePanel.add(lifeLabel[i]);
+            i++;
+        }
+
+        inventoryPanel = new JPanel();
+        inventoryPanel.setBounds(650,0,150,50);
+        inventoryPanel.setBackground(Color.blue);
+        inventoryPanel.setLayout(new GridLayout(1,3));
+        window.add(inventoryPanel);
+
+        //items
+        swordLabel = new JLabel();
+        ImageIcon swordIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("sword.png")));
+        image = swordIcon.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        swordIcon = new ImageIcon(image);
+        swordLabel.setIcon(swordIcon);
+        inventoryPanel.add(swordLabel);
+
+        shieldLabel = new JLabel();
+        ImageIcon shieldIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("shield.png")));
+        image = shieldIcon.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        shieldIcon = new ImageIcon(image);
+        shieldLabel.setIcon(shieldIcon);
+        inventoryPanel.add(shieldLabel);
+
+        lanternLabel = new JLabel();
+        ImageIcon lanternIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("lantern.png")));
+        image = lanternIcon.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        lanternIcon = new ImageIcon(image);
+        lanternLabel.setIcon(lanternIcon);
+        inventoryPanel.add(lanternLabel);
     }
 
     public void createMainField() {
