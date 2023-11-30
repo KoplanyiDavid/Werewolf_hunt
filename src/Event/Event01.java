@@ -33,6 +33,7 @@ public class Event01 {
 
     public void talkKnight() {
         gm.ui.messageText.setText("Lovag: Ne menj tovább fegyver nélkül!\nNézd meg a ládában, hátha van valami jó benne!");
+        gm.playSE(gm.knightDontGo);
     }
 
     public void attackKnight() {
@@ -40,23 +41,27 @@ public class Event01 {
             if (gm.player.hasSword == 0) {
                 if (gm.player.playerLife != 1) {
                     gm.ui.messageText.setText("Lovag: Hé, ne légy ostoba!");
+                    gm.playSE(gm.knightStupid);
                     gm.player.playerLife--;
-                    gm.player.updatePlayerStatus();
                 }
                 else if (gm.player.playerLife == 1) {
                     gm.ui.messageText.setText("Lovag: Idióta...");
                     gm.player.playerLife--;
-                    gm.player.updatePlayerStatus();
+                    gm.playSE(gm.knightDumbass);
+                    gm.playSE(gm.deathSound);
+                    gm.sc.showGameOver(0);
                 }
             }
             else if (gm.player.hasSword == 1) {
                 gm.ui.messageText.setText("Lovag: Bassza meg! AHH...\n(Legyőzted a lovagot és megszerezted a pajzsát)");
+                gm.playSE(gm.knightDef);
                 gm.player.hasShield = 1;
-                gm.player.updatePlayerStatus();
             }
+            gm.player.updatePlayerStatus();
         }
         else {
             gm.ui.messageText.setText("Lovag: Hagyj békén...");
+            gm.playSE(gm.knightLeave);
         }
     }
 
@@ -72,6 +77,7 @@ public class Event01 {
         if (gm.player.hasSword == 0) {
             gm.ui.messageText.setText("Kinyitod a ládát és találsz egy kardot!");
             gm.player.hasSword = 1;
+            gm.playMusic(gm.itemGet);
             gm.player.updatePlayerStatus();
         }
         else {

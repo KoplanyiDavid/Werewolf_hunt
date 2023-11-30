@@ -18,12 +18,37 @@ public class UI {
     JLabel[] lifeLabel = new JLabel[6];
     JPanel inventoryPanel;
     public JLabel swordLabel, shieldLabel, lanternLabel;
+
+    // game over ui
+    public JLabel titleLabel;
+    public JButton restartButton;
     public UI(GameManager gm) {
         this.gm = gm;
         createMainField();
         createPlayerField();
+        createGameOverField();
         generateScene();
         window.setVisible(true);
+    }
+
+    public void createGameOverField() {
+        titleLabel = new JLabel("",JLabel.CENTER);
+        titleLabel.setBounds(200,150,400,200);
+        titleLabel.setForeground(Color.red);
+        titleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 70));
+        titleLabel.setVisible(false);
+        window.add(titleLabel);
+
+        restartButton = new JButton();
+        restartButton.setBounds(340,320,120,50);
+        restartButton.setBorder(null);
+        restartButton.setBackground(null);
+        restartButton.setForeground(Color.white);
+        restartButton.setFocusPainted(false);
+        restartButton.addActionListener(gm.aHandler);
+        restartButton.setActionCommand("restart");
+        restartButton.setVisible(false);
+        window.add(restartButton);
     }
 
     private void createPlayerField() {
@@ -76,13 +101,13 @@ public class UI {
 
     public void createMainField() {
         window = new JFrame();
-        window.setSize(1920,1080);
+        window.setSize(1280,720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
 
         messageText = new JTextArea("THIS IS TEST");
-        messageText.setBounds(560,880,800,200);
+        messageText.setBounds(0,570,1280,150);
         messageText.setBackground(Color.black);
         messageText.setForeground(Color.white);
         messageText.setEditable(false);
@@ -93,16 +118,17 @@ public class UI {
     }
     public void createBackground(int bgNum, String bgFileName) {
         bgPanel[bgNum] = new JPanel();
-        bgPanel[bgNum].setBounds(0,0,1920,880);
+        bgPanel[bgNum].setBounds(50,0,1180,620);
         bgPanel[bgNum].setLayout(null);
+        bgPanel[bgNum].setVisible(false);
         window.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
-        bgLabel[bgNum].setBounds(0,0,1920,880);
+        bgLabel[bgNum].setBounds(0,0,1180,620);
 
         ImageIcon bgIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(bgFileName)));
         Image image = bgIcon.getImage();
-        Image newImg = image.getScaledInstance(1920,880,Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(1180,620,Image.SCALE_SMOOTH);
         bgIcon = new ImageIcon(newImg);
         bgLabel[bgNum].setIcon(bgIcon);
     }
@@ -201,8 +227,13 @@ public class UI {
         // Scene 2
         createBackground(1, "cave_entrance.jpg");
         createObject(1,0,500,200,300,"empty.png","Look","Talk","Enter", "lookCave", "talkCave", "enterCave");
-        createObject(1,500,500,200,300,"empty.png","Look","Talk","Search", "lookWoods", "talkWoods", "enterWoods");
+        createObject(1,500,500,200,300,"empty.png","Look","Talk","Search", "lookWoods", "talkWoods", "searchWoods");
         createArrowButton(1, 1500, 150, 50, 50,"goScene1", "rightarrow.png");
         bgPanel[1].add(bgLabel[1]);
+
+        //Scene 3
+        createBackground(2, "cave.png");
+        createArrowButton(2, 1500, 150, 50, 50,"goScene1", "rightarrow.png");
+        bgPanel[2].add(bgLabel[2]);
     }
 }
