@@ -3,7 +3,13 @@ package Main;
 import Event.Event01;
 import Event.Event02;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameManager {
     ActionHandler aHandler = new ActionHandler(this);
@@ -13,18 +19,7 @@ public class GameManager {
     public Event02 ev2 = new Event02(this);
     Music music = new Music();
     SE se = new SE();
-
-    //sound
-    public URL fieldMusic = getClass().getClassLoader().getResource("bensound-acousticbreeze.wav");
-    public URL caveMusic = getClass().getClassLoader().getResource("bensound-ofeliasdream.wav");
-    public URL knightDef = getClass().getClassLoader().getResource("knight_defeat_sound.wav");
-    public URL knightDontGo = getClass().getClassLoader().getResource("knight_dont_go_further.wav");
-    public URL knightDumbass = getClass().getClassLoader().getResource("knight_dumbass_sound.wav");
-    public URL knightLeave = getClass().getClassLoader().getResource("knight_leave_sound.wav");
-    public URL knightStupid = getClass().getClassLoader().getResource("knight_stupid_sound.wav");
-    public URL deathSound = getClass().getClassLoader().getResource("death.wav");
-    public URL itemGet = getClass().getClassLoader().getResource("itemGet.wav");
-
+    public HashMap<String, URL> soundMap = new HashMap<>();
     public URL currentMusic;
     public SceneChanger sc = new SceneChanger(this);
 
@@ -32,8 +27,23 @@ public class GameManager {
         new GameManager();
     }
 
+    public void readSoundNames(String filePath) {
+        String[] keys = {"field", "cave", "knightDef", "knightDontGo", "knightDumbass", "knightLeave", "knightStupid", "death", "itemGet"};
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filePath));
+            int i = 0;
+            for (String line : lines) {
+                soundMap.put(keys[i], getClass().getClassLoader().getResource(line));
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public GameManager() {
-        currentMusic = fieldMusic;
+        readSoundNames("sounds.txt");
+        currentMusic = soundMap.get("field");
         playMusic(currentMusic);
         player.setPlayerDefaultStatus();
         sc.showScene1();

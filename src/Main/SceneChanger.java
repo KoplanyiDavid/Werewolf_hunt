@@ -15,7 +15,7 @@ public class SceneChanger {
         gm.ui.messageText.setText("Találjuk meg a vérfarkast és mentsük meg a lányokat!");
 
         gm.stopMusic(gm.currentMusic);
-        gm.currentMusic = gm.fieldMusic;
+        gm.currentMusic = gm.soundMap.get("field");
         gm.playMusic(gm.currentMusic);
     }
 
@@ -26,7 +26,7 @@ public class SceneChanger {
         gm.ui.messageText.setText("");
 
         gm.stopMusic(gm.currentMusic);
-        gm.currentMusic = gm.caveMusic;
+        gm.currentMusic = gm.soundMap.get("cave");
         gm.playMusic(gm.currentMusic);
     }
 
@@ -46,7 +46,7 @@ public class SceneChanger {
         gm.ui.restartButton.setText("Click here to restart");
 
         gm.stopMusic(gm.currentMusic);
-        gm.playSE(gm.deathSound);
+        gm.playSE(gm.soundMap.get("death"));
     }
 
     public void exitGameOver() {

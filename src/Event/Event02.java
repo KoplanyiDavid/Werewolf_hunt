@@ -32,7 +32,7 @@ public class Event02 {
         if (gm.player.hasLantern == 0) {
             gm.ui.messageText.setText("Találtál egy lámpást.");
             gm.player.hasLantern = 1;
-            gm.playSE(gm.itemGet);
+            gm.playSE(gm.soundMap.get("itemGet"));
             gm.player.updatePlayerStatus();
         }
         else {

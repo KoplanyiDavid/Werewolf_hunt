@@ -1,0 +1,9 @@
+bensound-acousticbreeze.wav
+bensound-ofeliasdream.wav
+knight_defeat_sound.wav
+knight_dont_go_further.wav
+knight_dumbass_sound.wav
+knight_leave_sound.wav
+knight_stupid_sound.wav
+death.wav
+itemGet.wav

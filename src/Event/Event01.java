@@ -34,11 +34,11 @@ public class Event01 {
     public void talkKnight() {
         if (gm.player.hasSword == 1) {
             gm.ui.messageText.setText("Lovag: Hagyj békén...");
-            gm.playSE(gm.knightLeave);
+            gm.playSE(gm.soundMap.get("knightLeave"));
         }
         else {
             gm.ui.messageText.setText("Lovag: Ne menj tovább fegyver nélkül!\nNézd meg a ládában, hátha van valami jó benne!");
-            gm.playSE(gm.knightDontGo);
+            gm.playSE(gm.soundMap.get("knightDontGo"));
         }
     }
 
@@ -47,27 +47,27 @@ public class Event01 {
             if (gm.player.hasSword == 0) {
                 if (gm.player.playerLife != 1) {
                     gm.ui.messageText.setText("Lovag: Hé, ne légy ostoba!");
-                    gm.playSE(gm.knightStupid);
+                    gm.playSE(gm.soundMap.get("knightStupid"));
                     gm.player.playerLife--;
                 }
                 else if (gm.player.playerLife == 1) {
                     gm.ui.messageText.setText("Lovag: Idióta...");
                     gm.player.playerLife--;
-                    gm.playSE(gm.knightDumbass);
-                    gm.playSE(gm.deathSound);
+                    gm.playSE(gm.soundMap.get("knightDumbass"));
+                    gm.playSE(gm.soundMap.get("death"));
                     gm.sc.showGameOver(0);
                 }
             }
             else if (gm.player.hasSword == 1) {
                 gm.ui.messageText.setText("Lovag: Bassza meg! AHH...\n(Legyőzted a lovagot és megszerezted a pajzsát)");
-                gm.playSE(gm.knightDef);
+                gm.playSE(gm.soundMap.get("knightDef"));
                 gm.player.hasShield = 1;
             }
             gm.player.updatePlayerStatus();
         }
         else {
             gm.ui.messageText.setText("Lovag: Hagyj békén...");
-            gm.playSE(gm.knightLeave);
+            gm.playSE(gm.soundMap.get("knightLeave"));
         }
     }
 
@@ -83,7 +83,7 @@ public class Event01 {
         if (gm.player.hasSword == 0) {
             gm.ui.messageText.setText("Kinyitod a ládát és találsz egy kardot!");
             gm.player.hasSword = 1;
-            gm.playSE(gm.itemGet);
+            gm.playSE(gm.soundMap.get("itemGet"));
             gm.player.updatePlayerStatus();
         }
         else {
