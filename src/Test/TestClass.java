@@ -140,7 +140,7 @@ public class TestClass {
 
     @After
     public void tearDown() {
-        gm.stopMusic(gm.currentMusic);
+        gm.stopMusic();
     }
 
     @AfterClass

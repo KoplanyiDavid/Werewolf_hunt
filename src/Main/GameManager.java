@@ -55,10 +55,10 @@ public class GameManager {
     }
     public void playMusic(URL url) {
         music.setFile(url);
-        music.play(url);
-        music.loop(url);
+        music.play();
+        music.loop();
     }
-    public void stopMusic(URL url) {
-        music.stop(url);
+    public void stopMusic() {
+        music.stop();
     }
 }

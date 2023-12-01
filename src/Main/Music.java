@@ -17,15 +17,15 @@ public class Music {
         }
     }
 
-    public void play(URL name) {
+    public void play() {
         clip.setFramePosition(0);
         clip.start();
     }
 
-    public void loop(URL name) {
+    public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
-    public void stop(URL name) {
+    public void stop() {
         clip.stop();
     }
 }

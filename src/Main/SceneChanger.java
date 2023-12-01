@@ -14,7 +14,7 @@ public class SceneChanger {
         gm.ui.bgPanel[2].setVisible(false);
         gm.ui.messageText.setText("Találjuk meg a vérfarkast és mentsük meg a lányokat!");
 
-        gm.stopMusic(gm.currentMusic);
+        gm.stopMusic();
         gm.currentMusic = gm.soundMap.get("field");
         gm.playMusic(gm.currentMusic);
     }
@@ -25,7 +25,7 @@ public class SceneChanger {
         gm.ui.bgPanel[2].setVisible(false);
         gm.ui.messageText.setText("");
 
-        gm.stopMusic(gm.currentMusic);
+        gm.stopMusic();
         gm.currentMusic = gm.soundMap.get("cave");
         gm.playMusic(gm.currentMusic);
     }
@@ -45,7 +45,7 @@ public class SceneChanger {
         gm.ui.restartButton.setVisible(true);
         gm.ui.restartButton.setText("Click here to restart");
 
-        gm.stopMusic(gm.currentMusic);
+        gm.stopMusic();
         gm.playSE(gm.soundMap.get("death"));
     }
 
