@@ -51,7 +51,7 @@ public class GameManager {
 
     public void playSE(URL url) {
         se.setFile(url);
-        se.play(url);
+        se.play();
     }
     public void playMusic(URL url) {
         music.setFile(url);
