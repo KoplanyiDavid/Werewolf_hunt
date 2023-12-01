@@ -33,14 +33,14 @@ public class UI {
 
     public void createGameOverField() {
         titleLabel = new JLabel("",JLabel.CENTER);
-        titleLabel.setBounds(200,150,400,200);
+        titleLabel.setBounds(400,100,500,300);
         titleLabel.setForeground(Color.red);
-        titleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 70));
+        titleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 90));
         titleLabel.setVisible(false);
         window.add(titleLabel);
 
         restartButton = new JButton();
-        restartButton.setBounds(340,320,120,50);
+        restartButton.setBounds(550,320,200,100);
         restartButton.setBorder(null);
         restartButton.setBackground(null);
         restartButton.setForeground(Color.white);
@@ -71,8 +71,8 @@ public class UI {
         }
 
         inventoryPanel = new JPanel();
-        inventoryPanel.setBounds(650,0,150,50);
-        inventoryPanel.setBackground(Color.blue);
+        inventoryPanel.setBounds(1080,0,150,50);
+        inventoryPanel.setBackground(Color.black);
         inventoryPanel.setLayout(new GridLayout(1,3));
         window.add(inventoryPanel);
 
@@ -107,7 +107,7 @@ public class UI {
         window.setLayout(null);
 
         messageText = new JTextArea("THIS IS TEST");
-        messageText.setBounds(0,570,1280,150);
+        messageText.setBounds(50,570,1280,150);
         messageText.setBackground(Color.black);
         messageText.setForeground(Color.white);
         messageText.setEditable(false);
@@ -118,17 +118,18 @@ public class UI {
     }
     public void createBackground(int bgNum, String bgFileName) {
         bgPanel[bgNum] = new JPanel();
-        bgPanel[bgNum].setBounds(50,0,1180,620);
+        bgPanel[bgNum].setBounds(50,50,1180,530);
         bgPanel[bgNum].setLayout(null);
+        bgPanel[bgNum].setBackground(Color.black);
         bgPanel[bgNum].setVisible(false);
         window.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
-        bgLabel[bgNum].setBounds(0,0,1180,620);
+        bgLabel[bgNum].setBounds(0,0,1180,530);
 
         ImageIcon bgIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(bgFileName)));
         Image image = bgIcon.getImage();
-        Image newImg = image.getScaledInstance(1180,620,Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(1180,530,Image.SCALE_SMOOTH);
         bgIcon = new ImageIcon(newImg);
         bgLabel[bgNum].setIcon(bgIcon);
     }
@@ -216,24 +217,26 @@ public class UI {
     }
     public void generateScene() {
         // Scene 1
-        createBackground(0, "main_bgd.png");
-        createObject(0,1200,285,900,700,"house.png","Look","Talk","Rest", "lookHouse", "talkHouse", "restHouse");
-        createObject(0,300,500,100,300,"knight.png","Look","Talk","Attack", "lookKnight", "talkKnight", "attackKnight");
-        createObject(0,1000,800,200,100,"chest.png","Look","Talk","Open", "lookChest", "talkChest", "openChest");
+        createBackground(0, "main_bgd.jpg");
+        createObject(0,800,0,600,500,"house.png","Look","Talk","Rest", "lookHouse", "talkHouse", "restHouse");
+        createObject(0,200,160,80,250,"knight.png","Look","Talk","Attack", "lookKnight", "talkKnight", "attackKnight");
+        createObject(0,500,300,200,100,"chest.png","Look","Talk","Open", "lookChest", "talkChest", "openChest");
 
-        createArrowButton(0, 0, 150, 50, 50,"goScene2", "leftarrow.png");
+        createArrowButton(0, 50, 290, 75, 100,"goScene2", "leftarrow.png");
         bgPanel[0].add(bgLabel[0]);
 
         // Scene 2
         createBackground(1, "cave_entrance.jpg");
-        createObject(1,0,500,200,300,"empty.png","Look","Talk","Enter", "lookCave", "talkCave", "enterCave");
-        createObject(1,500,500,200,300,"empty.png","Look","Talk","Search", "lookWoods", "talkWoods", "searchWoods");
-        createArrowButton(1, 1500, 150, 50, 50,"goScene1", "rightarrow.png");
+        createObject(1,0,300,200,300,"empty.png","Look","Talk","Enter", "lookCave", "talkCave", "enterCave");
+        createObject(1,350,280,400,150,"empty.png","Look","Talk","Search", "lookWoods", "talkWoods", "searchWoods");
+        createArrowButton(1, 1000, 370, 100, 150,"goScene1", "rightarrow.png");
         bgPanel[1].add(bgLabel[1]);
 
         //Scene 3
         createBackground(2, "cave.png");
-        createArrowButton(2, 1500, 150, 50, 50,"goScene1", "rightarrow.png");
+        createObject(2,200,100,250,300,"girl01.png","Look","Talk","Enter", "lookCave", "talkCave", "enterCave");
+        createObject(2,700,200,250,330,"girl02.png","Look","Talk","Search", "lookWoods", "talkWoods", "searchWoods");
+        //createArrowButton(2, 1000, 150, 75, 100,"goScene1", "rightarrow.png");
         bgPanel[2].add(bgLabel[2]);
     }
 }

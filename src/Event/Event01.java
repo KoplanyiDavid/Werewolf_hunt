@@ -32,8 +32,14 @@ public class Event01 {
     }
 
     public void talkKnight() {
-        gm.ui.messageText.setText("Lovag: Ne menj tovább fegyver nélkül!\nNézd meg a ládában, hátha van valami jó benne!");
-        gm.playSE(gm.knightDontGo);
+        if (gm.player.hasSword == 1) {
+            gm.ui.messageText.setText("Lovag: Hagyj békén...");
+            gm.playSE(gm.knightLeave);
+        }
+        else {
+            gm.ui.messageText.setText("Lovag: Ne menj tovább fegyver nélkül!\nNézd meg a ládában, hátha van valami jó benne!");
+            gm.playSE(gm.knightDontGo);
+        }
     }
 
     public void attackKnight() {
@@ -77,7 +83,7 @@ public class Event01 {
         if (gm.player.hasSword == 0) {
             gm.ui.messageText.setText("Kinyitod a ládát és találsz egy kardot!");
             gm.player.hasSword = 1;
-            gm.playMusic(gm.itemGet);
+            gm.playSE(gm.itemGet);
             gm.player.updatePlayerStatus();
         }
         else {

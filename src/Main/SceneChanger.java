@@ -34,11 +34,11 @@ public class SceneChanger {
         gm.ui.bgPanel[0].setVisible(false);
         gm.ui.bgPanel[1].setVisible(false);
         gm.ui.bgPanel[2].setVisible(true);
-        gm.ui.messageText.setText("Beléptél a barlangba...");
+        gm.ui.messageText.setText("Beléptél a barlangba...Megvannak a lányok!\n***A játéknak itt vége, a második részből kiderül mi történt valójában...***");
     }
 
     public void showGameOver(int currentBgNum) {
-        gm.ui.bgPanel[currentBgNum].setVisible(true);
+        gm.ui.bgPanel[currentBgNum].setVisible(false);
         gm.ui.bgPanel[currentBgNum].setBackground(Color.black);
         gm.ui.titleLabel.setVisible(true);
         gm.ui.titleLabel.setText("YOU DIED");
